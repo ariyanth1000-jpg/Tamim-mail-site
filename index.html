@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+html,body{
+    margin:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+
+.viewer{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+}
+
+/* দৃশ্যমান অংশ = 50% (100 - 10 - 40) */
+.viewer iframe{
+    position:absolute;
+    left:0;
+    top:-10vh;      /* উপরের 10% লুকানো */
+    width:100vw;
+    height:200vh;   /* বড় করে নেওয়া */
+    border:none;
+    overflow:hidden;
+    pointer-events:auto;
+}
+</style>
+</head>
+<body>
+
+<div class="viewer">
+    <iframe src="https://2fa.co.com/"></iframe>
+</div>
+
+</body>
+</html>
