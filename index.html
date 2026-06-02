@@ -1,41 +1,1143 @@
-<!DOCTYPE html>
+<style>
+@keyframes tamimGlow{
+  0%{background:linear-gradient(135deg,#2563eb,#22c55e)}
+  33%{background:linear-gradient(135deg,#22c55e,#facc15)}
+  66%{background:linear-gradient(135deg,#f59e0b,#ef4444)}
+  100%{background:linear-gradient(135deg,#2563eb,#22c55e)}
+}
+
+@keyframes borderRun{
+  0%{ background-position:0% 50%; }
+  100%{ background-position:200% 50%; }
+}
+
+@keyframes glowDrift{
+  0%,100%{ transform:translate(0,0); opacity:.85; }
+  50%{ transform:translate(12px,-10px); opacity:1; }
+}
+</style>
+
+<header style="
+  position:relative;
+  border-radius:18px;
+  margin-bottom:16px;
+  padding:12px;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(10px);
+  overflow:visible;
+">
+
+  <!-- 🔹 OUTER FLOATING GLOW (raised top feel) -->
+  <div style="
+    position:absolute;
+    inset:-16px -14px -10px -14px;
+    border-radius:24px;
+    background:
+      radial-gradient(circle at 20% 15%, rgba(37,99,235,.25), transparent 60%),
+      radial-gradient(circle at 80% 25%, rgba(34,197,94,.22), transparent 62%),
+      radial-gradient(circle at 50% 110%, rgba(250,204,21,.18), transparent 60%);
+    filter:blur(16px);
+    animation:glowDrift 9s ease-in-out infinite;
+    pointer-events:none;
+    z-index:0;
+  "></div>
+
+  <!-- 🔹 THIN RUNNING BORDER -->
+  <div style="
+    position:absolute;
+    inset:0;
+    border-radius:18px;
+    padding:1.5px;
+    background:linear-gradient(90deg,#2563eb,#22c55e,#facc15,#ef4444,#2563eb);
+    background-size:300% 100%;
+    animation:borderRun 7s linear infinite;
+
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite:xor;
+    mask-composite:exclude;
+
+    pointer-events:none;
+    z-index:3;
+  "></div>
+
+  <!-- 🔹 INNER INSET DEPTH (head inside look) -->
+  <div style="
+    position:absolute;
+    inset:4px;
+    border-radius:14px;
+    background:#ffffff;
+    box-shadow:
+      inset 0 2px 4px rgba(255,255,255,.9),
+      inset 0 10px 18px rgba(15,23,42,.08),
+      inset 0 -6px 12px rgba(15,23,42,.05);
+    pointer-events:none;
+    z-index:1;
+  "></div>
+
+  <!-- CONTENT -->
+  <div style="
+    position:relative;
+    z-index:5;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  ">
+
+    <!-- LOGO -->
+    <div style="
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      background:linear-gradient(135deg,#2563eb,#22c55e);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      font-weight:900;
+      font-size:14px;
+      box-shadow:0 6px 14px rgba(37,99,235,.35);
+      flex-shrink:0;
+    ">
+      TA
+    </div>
+
+    <!-- TITLE -->
+    <div style="flex:1;min-width:0;">
+      <div style="
+        font-weight:900;
+        font-size:16px;
+        line-height:1.1;
+        background:linear-gradient(90deg,#2563eb,#22c55e,#f59e0b);
+        -webkit-background-clip:text;
+        -webkit-text-fill-color:transparent;
+        white-space:nowrap;
+        overflow:hidden;
+        text-overflow:ellipsis;
+      ">
+        Trending Academy Limited
+      </div>
+      <div style="
+        font-size:10.5px;
+        font-weight:700;
+        color:#64748b;
+        white-space:nowrap;
+        overflow:hidden;
+        text-overflow:ellipsis;
+      ">
+        Fast OTP • Click to Copy • Secure Inbox
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
+
+      <span style="
+        font-size:11px;
+        font-weight:900;
+        color:#0f172a;
+        padding:5px 10px;
+        border-radius:999px;
+        background:linear-gradient(135deg,#2563eb,#22c55e);
+        animation:tamimGlow 6s infinite;
+        box-shadow:0 8px 18px rgba(15,23,42,.15);
+        white-space:nowrap;
+      ">
+        TAMIM & ANU
+      </span>
+
+      <span style="
+        width:24px;
+        height:24px;
+        border-radius:999px;
+        background:#1877f2;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        color:#fff;
+        font-size:13px;
+        font-weight:900;
+        box-shadow:0 10px 22px rgba(24,119,242,.30);
+      ">
+        ✓
+      </span>
+
+    </div>
+  </div>
+
+  <!-- BOTTOM LINE -->
+  <div style="
+    position:relative;
+    z-index:5;
+    height:3px;
+    margin-top:10px;
+    border-radius:999px;
+    background:linear-gradient(90deg,#2563eb,#22c55e,#facc15);
+    opacity:.85;
+  "></div>
+</header>
+<!doctype html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta charset="utf-8">
+<title>Trending Academy Mail</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-html,body{
-    margin:0;
-    width:100%;
-    height:100%;
-    overflow:hidden;
+body{
+  font-family:Arial, sans-serif;
+  background:#f2f4f8;
+  margin:0;
+  padding:16px;
+}
+.wrap{
+  max-width:720px;
+  margin:auto;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+.card{
+  background:#fff;
+  padding:16px;
+  border-radius:16px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+.center{text-align:center}
+h2{margin:6px 0 14px}
+.input{
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  border:1px solid #ddd;
+  font-size:15px;
+  box-sizing:border-box;
+  outline:none;
+  margin-bottom:10px;
+}
+.input:focus{ border-color:#93c5fd; box-shadow:0 0 0 4px rgba(147,197,253,.35); }
+.btn{
+  width:100%;
+  padding:14px;
+  border:0;
+  border-radius:14px;
+  font-size:15px;
+  font-weight:800;
+  cursor:pointer;
+}
+.btn-primary{background:#2563eb;color:#fff}
+.btn-dark{background:#111827;color:#fff}
+.btn-green{background:#16a34a;color:#fff}
+.btn-yellow{background:#facc15;color:#111827}
+.row{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
+.row button{flex:1}
+.pill{
+  margin-top:14px;
+  padding:10px;
+  background:#f3f4f6;
+  border-radius:12px;
+  font-weight:800;
+  word-break:break-all;
+}
+.muted{color:#6b7280;font-size:13px;margin-top:10px}
+pre{white-space:pre-wrap;margin:0}
+small{color:#6b7280}
+.hidden{display:none !important;}
+
+/* ✅ Inbox wrapper */
+.inboxShell{
+  margin-top:10px;
+  border-radius:18px;
+  overflow:hidden;
+  border:1px solid #e5e7eb;
+  background:#fff;
 }
 
-.viewer{
-    position:fixed;
-    inset:0;
-    overflow:hidden;
+/* ✅ prettier title line */
+.inboxTitle{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  font-weight:900;
+  font-size:22px;
+  padding:16px 12px;
+  color:#0f172a;
+  background:linear-gradient(180deg,#ffffff 0%, #f8fafc 100%);
+  border-bottom:1px solid #eef2f7;
+  position:relative;
+}
+.inboxTitle:after{
+  content:"";
+  position:absolute;
+  left:18px; right:18px; bottom:8px;
+  height:3px;
+  border-radius:999px;
+  background:linear-gradient(90deg,#2563eb,#22c55e,#facc15);
+  opacity:.8;
+}
+.inboxIcon{
+  font-size:22px;
+  filter:drop-shadow(0 2px 4px rgba(0,0,0,.10));
 }
 
-/* দৃশ্যমান অংশ = 50% (100 - 10 - 40) */
-.viewer iframe{
-    position:absolute;
-    left:0;
-    top:-10vh;      /* উপরের 10% লুকানো */
-    width:100vw;
-    height:200vh;   /* বড় করে নেওয়া */
-    border:none;
-    overflow:hidden;
-    pointer-events:auto;
+.inboxList{
+  padding:0;
+  margin:0;
+  list-style:none;
+}
+.mailItem{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:12px 14px;
+  border-top:1px solid #eef2f7;
+  background:#fff;
+}
+.mailItem:nth-child(even){ background:#fbfdff; }
+
+.subjectLeft{
+  min-width:0;
+  flex:1;
+  font-weight:900;
+  font-size:18px;
+  color:#111827;
+}
+.subjectLeft .ellipsis{
+  display:block;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.viewRight{
+  flex:0 0 auto;
+  display:flex;
+  justify-content:flex-end;
+}
+.btnViewPill{
+  border:0;
+  background:#3b82f6;
+  color:#fff;
+  font-weight:900;
+  border-radius:999px;
+  padding:10px 14px;
+  line-height:1;
+  min-width:86px;
+  max-width:86px;
+  cursor:pointer;
+  box-sizing:border-box;
+}
+.btnViewPill:active{ transform:scale(.99); }
+
+/* ✅ Detail */
+.detailWrap{
+  padding:12px 14px 16px;
+  border-top:1px solid #eef2f7;
+  background:#eef2ff;
+}
+.detailBox{
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 6px 18px rgba(0,0,0,.06);
+}
+.detailHeader{ padding:14px 14px 10px; }
+.detailTitle{
+  font-size:20px;
+  font-weight:900;
+  margin:0;
+  color:#374151;
+}
+.hrBlue{
+  height:3px;
+  background:#2563eb;
+  border-radius:999px;
+  margin:10px 0 12px;
+  opacity:.8;
+}
+.detailGrid{
+  display:grid;
+  grid-template-columns:110px 1fr;
+  gap:10px 12px;
+  padding:0 14px 14px;
+  align-items:start;
+}
+.label{font-weight:900;color:#374151;}
+.value{color:#111827;word-break:break-word;}
+.bodyBox{ border-top:1px solid #e5e7eb; background:#fff; }
+.bodyFrame{
+  width:100%;
+  height:520px;
+  border:0;
+  display:block;
+  background:#fff;
+}
+.bodyText{padding:12px;}
+
+@media (max-width:560px){
+  .mailItem{ padding:10px 12px; gap:8px; }
+  .subjectLeft{ font-size:16px; }
+  .btnViewPill{ min-width:74px; max-width:74px; padding:9px 10px; }
+  .detailWrap{ padding:10px 12px 14px; }
+  .inboxTitle{ font-size:20px; padding:14px 10px; }
+}
+@media (max-width:360px){
+  .btnViewPill{ min-width:68px; max-width:68px; padding:8px 9px; font-size:12px; }
+}
+
+/* ✅ click-to-copy code styling (Inbox + Detail + Body) */
+.taCode{
+  display:inline-block;
+  padding:2px 8px;
+  border-radius:10px;
+  background:#eef2ff;
+  border:1px solid #c7d2fe;
+  font-weight:900;
+  letter-spacing:.4px;
+  cursor:pointer;
+  user-select:none;
+  -webkit-tap-highlight-color:transparent;
+}
+.taCode:active{ transform:scale(.99); }
+
+.taCopiedToast{
+  position:fixed;
+  left:50%;
+  bottom:16px;
+  transform:translateX(-50%);
+  background:#111827;
+  color:#fff;
+  padding:10px 12px;
+  border-radius:999px;
+  font-weight:900;
+  font-size:13px;
+  box-shadow:0 12px 28px rgba(0,0,0,.18);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s ease, transform .2s ease;
+}
+.taCopiedToast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(-4px);
 }
 </style>
 </head>
 <body>
 
-<div class="viewer">
-    <iframe src="https://2fa.co.com/"></iframe>
+<div class="wrap">
+
+<!-- TOP -->
+<div class="card center">
+  <h2>📧 Trending Academy Mail</h2>
+
+  <input id="nameOrEmail" class="input" placeholder="tamim or tamim@domain.com" />
+
+  <div id="domainArea">
+    <select id="domainSelect" class="input"></select>
+    <div class="muted" id="domainStatus">Loading domains...</div>
+  </div>
+
+  <div class="row">
+    <button class="btn btn-primary" onclick="useCustomOrFull()">Use Custom</button>
+    <button class="btn btn-dark" onclick="generateRandom()">TA New Email</button>
+  </div>
+
+  <div class="row" style="margin-top:8px">
+    <button class="btn btn-green" onclick="copyEmail()">📋 Copy Mail</button>
+    <button class="btn btn-yellow" onclick="loadInbox(false)">🔄 Refresh Inbox</button>
+  </div>
+
+  <div class="pill">
+    <span id="email">---</span>
+  </div>
+
+  <div class="muted" id="status">উপরে নাম/ইমেইল দিয়ে Use চাপুন</div>
 </div>
 
+<!-- INBOX -->
+<div class="card" id="inboxCard">
+  <div id="inbox" class="muted" style="margin-top:10px"></div>
+</div>
+
+</div>
+
+<div id="taToast" class="taCopiedToast">✅ Copied</div>
+
+<script>
+const BASE="https://tinyhost.shop";
+let cur={user:null,domain:null};
+let inboxTimer=null;
+
+let openMailId=null;
+let openIndex=null;
+
+function setStatus(t){ document.getElementById("status").innerText=t; }
+
+function escapeHtml(s){
+  return String(s ?? "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+function safeUser(u){
+  u = (u||"").toLowerCase().trim();
+  u = u.replace(/[^a-z0-9._-]/g,"");
+  return u.slice(0,30);
+}
+
+function normalizeInput(raw){
+  raw = String(raw||"").trim().toLowerCase();
+  raw = raw.replace(/\s+/g,"");
+  return raw;
+}
+
+function parseInputToEmail(raw){
+  raw = normalizeInput(raw);
+
+  if(raw.includes("@")){
+    const parts = raw.split("@");
+    if(parts.length !== 2) return null;
+    const user = safeUser(parts[0]);
+    const domain = parts[1];
+    if(!user) return null;
+    if(!/^[a-z0-9.-]+\.[a-z]{2,}$/i.test(domain)) return null;
+    return { user, domain, full: `${user}@${domain}` };
+  }
+
+  const user = safeUser(raw);
+  if(!user) return null;
+  const domain = document.getElementById("domainSelect").value;
+  if(!domain) return null;
+  return { user, domain, full: `${user}@${domain}` };
+}
+
+function startAutoRefresh(){
+  if(inboxTimer) clearInterval(inboxTimer);
+  inboxTimer=setInterval(()=>loadInbox(true),5000);
+}
+function stopAutoRefresh(){
+  if(inboxTimer) clearInterval(inboxTimer);
+  inboxTimer=null;
+}
+
+function randUser(len=7){
+  const c="abcdefghijklmnopqrstuvwxyz0123456789";
+  let s="";
+  for(let i=0;i<len;i++) s+=c[Math.random()*c.length|0];
+  return s;
+}
+
+const FALLBACK_DOMAINS = [
+  "sportykiddo.com","mailum.com","tmails.net","tmpbox.net","maildrop.cc",
+  "inboxify.net","fastinbox.me","tempmx.com","dropmail.one","mailgen.cc",
+  "mailhub.world","quickmail.click","inboxspot.net","tmpmail.pro"
+];
+
+async function getDomains(){
+  const urls = [
+    BASE + "/api/random-domains/?limit=200",
+    BASE + "/api/random-domains/?limit=50"
+  ];
+
+  for(const url of urls){
+    try{
+      const r = await fetch(url, { cache:"no-store" });
+      if(!r.ok) continue;
+      const d = await r.json();
+      const list = d.data?.domains || d.domains || d.data || d || [];
+      const uniq = Array.from(new Set(list)).filter(Boolean);
+      if(uniq.length) return uniq;
+    }catch(e){}
+  }
+  return Array.from(new Set(FALLBACK_DOMAINS));
+}
+
+async function loadDomainsToSelect(){
+  const sel=document.getElementById("domainSelect");
+  const st=document.getElementById("domainStatus");
+  sel.innerHTML = `<option value="">Loading...</option>`;
+  st.innerText = "Loading domains...";
+
+  try{
+    const domainsAll = await getDomains();
+    sel.innerHTML="";
+    domainsAll.forEach(d=>{
+      const o=document.createElement("option");
+      o.value=d; o.textContent=d;
+      sel.appendChild(o);
+    });
+
+    const usedFallback = domainsAll.join(",") === Array.from(new Set(FALLBACK_DOMAINS)).join(",");
+    st.innerText = usedFallback
+      ? `✅ ${domainsAll.length} domains loaded (fallback)`
+      : `✅ ${domainsAll.length} domains loaded`;
+  }catch(e){
+    sel.innerHTML = `<option value="">Domain load failed</option>`;
+    st.innerText="❌ Domain load failed";
+  }
+}
+
+function updateDomainVisibility(){
+  const raw = normalizeInput(document.getElementById("nameOrEmail").value);
+  const domainArea = document.getElementById("domainArea");
+  if(raw && raw.includes("@")) domainArea.classList.add("hidden");
+  else domainArea.classList.remove("hidden");
+}
+
+async function useCustomOrFull(){
+  const raw = document.getElementById("nameOrEmail").value;
+  const parsed = parseInputToEmail(raw);
+
+  if(!parsed){
+    setStatus("full email OR name + domain select");
+    return;
+  }
+
+  cur = { user: parsed.user, domain: parsed.domain };
+  document.getElementById("email").innerText = parsed.full;
+  localStorage.setItem("last_mailbox", parsed.full);
+
+  closeView(true);
+
+  setStatus("✅ Email ready. Inbox auto refreshing..");
+  await loadInbox(false);
+  startAutoRefresh();
+}
+
+async function generateRandom(){
+  try{
+    setStatus("Generating random email...");
+    const domainsAll = await getDomains();
+    const domain = domainsAll[Math.random()*domainsAll.length|0];
+    const user = randUser(7);
+
+    cur = { user, domain };
+    const full = `${user}@${domain}`;
+    document.getElementById("email").innerText = full;
+
+    document.getElementById("nameOrEmail").value = "";
+    updateDomainVisibility();
+    localStorage.setItem("last_mailbox", full);
+
+    closeView(true);
+
+    setStatus("✅ Random email ready. Inbox auto refresh....");
+    await loadInbox(false);
+    startAutoRefresh();
+  }catch(e){
+    setStatus("❌ Random generate failed");
+  }
+}
+
+function renderInboxShell(innerListHtml){
+  return `
+    <div class="inboxShell">
+      <div class="inboxTitle"><span class="inboxIcon">📥</span> TA Gmail Inbox</div>
+      ${innerListHtml}
+    </div>
+  `;
+}
+
+/* ✅ ONLY numbers (4-8 digits) will be clickable */
+function extractCodesFromText(text){
+  const t = String(text||"");
+  const found = t.match(/\b\d{4,8}\b/g) || [];
+  const uniq = [];
+  for(const x of found){
+    if(!uniq.includes(x)) uniq.push(x);
+  }
+  return uniq;
+}
+
+function textToHtmlWithCodes(text, wrapWithEllipsis){
+  const safe = escapeHtml(text || "");
+  const codes = extractCodesFromText(text);
+
+  if(!codes.length){
+    return wrapWithEllipsis
+      ? `<span class="ellipsis">${safe}</span>`
+      : safe;
+  }
+
+  let html = safe;
+  codes.forEach(code=>{
+    const re = new RegExp(`\\b${code}\\b`, "g");
+    html = html.replace(re, `<span class="taCode" data-code="${code}">${code}</span>`);
+  });
+
+  return wrapWithEllipsis
+    ? `<span class="ellipsis">${html}</span>`
+    : html;
+}
+
+function renderInboxList(mails){
+  const items = mails.map((m,i)=>{
+    const id = (m.id||m.email_id||m._id||"");
+    const subject = m.subject || "No subject";
+
+    return `
+      <li class="mailItem" id="item-${i}">
+        <div class="subjectLeft">
+          ${textToHtmlWithCodes(subject, true)}
+        </div>
+        <div class="viewRight">
+          <button class="btnViewPill" onclick="toggleView('${escapeHtml(id)}', ${i})">View</button>
+        </div>
+      </li>
+      <div id="detail-${i}"></div>
+    `;
+  }).join("");
+
+  return `<ul class="inboxList">${items}</ul>`;
+}
+
+function closeView(keepRefresh=false){
+  if(openIndex !== null){
+    const d = document.getElementById(`detail-${openIndex}`);
+    if(d) d.innerHTML = "";
+  }
+  openMailId = null;
+  openIndex = null;
+
+  if(!keepRefresh) startAutoRefresh();
+}
+
+async function toggleView(id, index){
+  if(!id) return;
+
+  if(openMailId === id){
+    closeView(false);
+    return;
+  }
+
+  if(openIndex !== null && openIndex !== index){
+    const prev = document.getElementById(`detail-${openIndex}`);
+    if(prev) prev.innerHTML = "";
+  }
+
+  openMailId = id;
+  openIndex = index;
+
+  stopAutoRefresh();
+
+  const holder = document.getElementById(`detail-${index}`);
+  if(!holder) return;
+
+  holder.innerHTML = `
+    <div class="detailWrap">
+      <div class="detailBox" id="detailBox-${index}">
+        <div class="detailHeader">
+          <h4 class="detailTitle">Email Detail</h4>
+          <div class="hrBlue"></div>
+          <div class="muted">Loading...</div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  holder.scrollIntoView({ behavior:"smooth", block:"nearest" });
+
+  await loadMailIntoDetail(id, index);
+}
+
+/* ✅ text-body numbers clickable */
+function makeBodyTextClickableNumbers(text){
+  const safe = escapeHtml(text || "");
+  return safe.replace(/\b(\d{4,8})\b/g, `<span class="taCode" data-code="$1">$1</span>`);
+}
+
+/* ✅ iframe-body numbers clickable */
+function enableIframeNumberCopy(iframe){
+  if(!iframe) return;
+  const handler = () => {
+    try{
+      const doc = iframe.contentDocument;
+      if(!doc) return;
+
+      const WALKER = doc.createTreeWalker(doc.body, NodeFilter.SHOW_TEXT, {
+        acceptNode(node){
+          if(!node.nodeValue) return NodeFilter.FILTER_REJECT;
+          if(/\b\d{4,8}\b/.test(node.nodeValue)) return NodeFilter.FILTER_ACCEPT;
+          return NodeFilter.FILTER_REJECT;
+        }
+      });
+
+      const textNodes = [];
+      let n;
+      while((n = WALKER.nextNode())) textNodes.push(n);
+
+      textNodes.forEach(node=>{
+        const txt = node.nodeValue;
+        const parts = txt.split(/(\b\d{4,8}\b)/g);
+        if(parts.length <= 1) return;
+
+        const frag = doc.createDocumentFragment();
+        parts.forEach(part=>{
+          if(/^\d{4,8}$/.test(part)){
+            const span = doc.createElement("span");
+            span.textContent = part;
+            span.setAttribute("data-code", part);
+            span.style.display = "inline-block";
+            span.style.padding = "2px 8px";
+            span.style.borderRadius = "10px";
+            span.style.background = "#eef2ff";
+            span.style.border = "1px solid #c7d2fe";
+            span.style.fontWeight = "900";
+            span.style.letterSpacing = ".4px";
+            span.style.cursor = "pointer";
+            span.style.userSelect = "none";
+            span.style.webkitTapHighlightColor = "transparent";
+            frag.appendChild(span);
+          }else{
+            frag.appendChild(doc.createTextNode(part));
+          }
+        });
+        node.parentNode.replaceChild(frag, node);
+      });
+
+      doc.addEventListener("click", async (e)=>{
+        const target = e.target;
+        if(target && target.getAttribute && target.getAttribute("data-code")){
+          const code = target.getAttribute("data-code");
+          if(code) {
+            e.preventDefault();
+            e.stopPropagation();
+            await copyToClipboard(code);
+            showToast("✅ Code Copied: " + code);
+          }
+        }
+      }, { passive:false });
+
+    }catch(err){}
+  };
+
+  iframe.addEventListener("load", handler, { once:true });
+}
+
+/* ✅ toast + clipboard */
+let toastTimer=null;
+function showToast(msg){
+  const t = document.getElementById("taToast");
+  if(!t) return;
+  t.textContent = msg || "✅ Copied";
+  t.classList.add("show");
+  if(toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove("show"), 1200);
+}
+
+async function copyToClipboard(text){
+  try{
+    await navigator.clipboard.writeText(String(text));
+    return true;
+  }catch(e){
+    try{
+      const ta = document.createElement("textarea");
+      ta.value = String(text);
+      ta.style.position="fixed";
+      ta.style.left="-9999px";
+      ta.style.top="0";
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
+      return true;
+    }catch(err){
+      return false;
+    }
+  }
+}
+
+/* ✅ ONLY .taCode click => copy */
+document.addEventListener("click", async (e)=>{
+  const el = e.target;
+  if(!el) return;
+  if(el.classList && el.classList.contains("taCode")){
+    const code = el.getAttribute("data-code");
+    if(code){
+      e.preventDefault();
+      e.stopPropagation();
+      await copyToClipboard(code);
+      showToast("✅ Code Copied: " + code);
+    }
+  }
+}, { passive:false });
+
+async function loadMailIntoDetail(id, index){
+  const box = document.getElementById(`detailBox-${index}`);
+  if(!box) return;
+
+  try{
+    const r=await fetch(`${BASE}/api/email/${encodeURIComponent(cur.domain)}/${encodeURIComponent(cur.user)}/${encodeURIComponent(id)}`);
+    const d=await r.json();
+    const m=d.data?.email||d.email||d;
+
+    const sender = m.sender || m.from || m.mail_from || "";
+    const subject = m.subject || "";
+    const date = m.date || m.created_at || m.time || "";
+
+    const textBody = m.body || m.text || "";
+    const htmlBody = m.html_body || m.html || "";
+
+    box.innerHTML = `
+      <div class="detailHeader">
+        <h4 class="detailTitle">Email Detail</h4>
+        <div class="hrBlue"></div>
+      </div>
+
+      <div class="detailGrid">
+        <div class="label">Sender:</div>
+        <div class="value">${escapeHtml(sender || "—")}</div>
+
+        <div class="label">Subject:</div>
+        <div class="value">${textToHtmlWithCodes(subject || "—", false)}</div>
+
+        <div class="label">Date:</div>
+        <div class="value">${escapeHtml(date || "—")}</div>
+
+        <div class="label">Body:</div>
+        <div class="value"></div>
+      </div>
+
+      <div class="bodyBox" id="bodyBox-${index}">
+        <div class="bodyText muted">(empty)</div>
+      </div>
+    `;
+
+    const bodyBox = document.getElementById(`bodyBox-${index}`);
+
+    if(htmlBody && String(htmlBody).trim()){
+      bodyBox.innerHTML = `
+        <iframe id="mailFrame-${index}" class="bodyFrame"
+          sandbox="allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"></iframe>
+      `;
+      const frame = document.getElementById(`mailFrame-${index}`);
+
+      const wrapped = `<!doctype html><html><head><meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <base target="_blank">
+        <style>
+          body{font-family:Arial,sans-serif;margin:0;padding:12px}
+          img{max-width:100%;height:auto}
+        </style>
+      </head><body>${htmlBody}</body></html>`;
+
+      frame.srcdoc = wrapped;
+
+      // ✅ IMPORTANT: now iframe DOM accessible, body number click-to-copy will work
+      enableIframeNumberCopy(frame);
+      return;
+    }
+
+    if(textBody && String(textBody).trim()){
+      bodyBox.innerHTML = `<div class="bodyText"><pre>${makeBodyTextClickableNumbers(textBody)}</pre></div>`;
+      return;
+    }
+
+    bodyBox.innerHTML = `<div class="bodyText muted">(empty)</div>`;
+  }catch(e){
+    box.innerHTML = `<div class="detailHeader"><div class="muted">Mail open failed</div></div>`;
+  }
+}
+
+async function loadInbox(silent=false){
+  const box=document.getElementById("inbox");
+
+  if(!cur.user || !cur.domain){
+    box.innerHTML = renderInboxShell(`<div class="muted" style="padding:14px">Set email first.</div>`);
+    return;
+  }
+
+  if(!silent) setStatus("Checking inbox...");
+
+  if(openMailId) return;
+
+  try{
+    const r=await fetch(`${BASE}/api/email/${encodeURIComponent(cur.domain)}/${encodeURIComponent(cur.user)}/?page=1&limit=20`, { cache:"no-store" });
+    const d=await r.json();
+    const mails=d.data?.emails||d.emails||d.data||[];
+
+    if(!mails.length){
+      box.innerHTML = renderInboxShell(`<div class="muted" style="padding:14px">No mail yet. Auto refreshing...</div>`);
+      if(!silent) setStatus("No mail yet. Auto refreshing...");
+      return;
+    }
+
+    box.innerHTML = renderInboxShell(renderInboxList(mails));
+    if(!silent) setStatus(`✅ Inbox loaded (${mails.length})`);
+  }catch(e){
+    box.innerHTML = renderInboxShell(`<div class="muted" style="padding:14px">Inbox load failed</div>`);
+    if(!silent) setStatus("❌ Inbox load failed");
+  }
+}
+
+function copyEmail(){
+  const e=document.getElementById("email").innerText;
+  if(!e||e==="---"){ setStatus("আগে email set করুন"); return; }
+  navigator.clipboard.writeText(e);
+  setStatus("✅ Copied!");
+}
+
+/* restore */
+(function restore(){
+  document.getElementById("nameOrEmail").value = "";
+  updateDomainVisibility();
+
+  const saved = localStorage.getItem("last_mailbox");
+  if(saved){
+    const raw = normalizeInput(saved);
+    if(raw.includes("@")){
+      const parts = raw.split("@");
+      if(parts.length === 2){
+        const user = safeUser(parts[0]);
+        const domain = parts[1];
+        if(user && domain){
+          cur = { user, domain };
+          document.getElementById("email").innerText = `${user}@${domain}`;
+          setStatus("✅ Last email loaded. Inbox auto refresh....");
+          loadInbox(true);
+          startAutoRefresh();
+        }
+      }
+    }
+  }else{
+    loadInbox(true);
+  }
+})();
+
+/* init */
+(async function init(){
+  await loadDomainsToSelect();
+  updateDomainVisibility();
+})();
+document.getElementById("nameOrEmail").addEventListener("input", updateDomainVisibility);
+document.addEventListener("visibilitychange",()=>{
+  if(!document.hidden && cur.user) loadInbox(true);
+});
+</script>
+<!-- ===================== LONG INFO FOOTER ===================== -->
+<footer style="
+  margin-top:24px;
+  background:#0f172a;
+  color:#e5e7eb;
+  padding:26px 18px 30px;
+  border-radius:20px 20px 0 0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto;
+">
+
+  <div style="max-width:900px;margin:auto;display:flex;flex-direction:column;gap:22px;">
+
+    <!-- SECTION 1 -->
+    <div>
+      <h3 style="font-size:17px;font-weight:900;margin-bottom:8px;color:#f8fafc;">
+        How Disposable Email Helps You
+      </h3>
+      <p style="font-size:13px;line-height:1.8;color:#cbd5f5;">
+        A temporary email address helps protect your real inbox from spam, unwanted newsletters,
+        tracking attempts, and suspicious registrations. You can receive verification emails
+        without sharing your personal identity.
+      </p>
+    </div>
+
+    <!-- SECTION 2 -->
+    <div>
+      <h3 style="font-size:17px;font-weight:900;margin-bottom:8px;color:#f8fafc;">
+        Why Use Trending Academy Mail?
+      </h3>
+      <ul style="padding-left:18px;font-size:13px;line-height:1.9;color:#cbd5f5;">
+        <li>No registration or personal data required</li>
+        <li>Instant inbox creation with random domains</li>
+        <li>OTP and verification friendly</li>
+        <li>Spam-free & privacy focused system</li>
+        <li>Works on all devices and browsers</li>
+      </ul>
+    </div>
+
+    <!-- SECTION 3 -->
+    <div>
+      <h3 style="font-size:17px;font-weight:900;margin-bottom:8px;color:#f8fafc;">
+        Important Privacy Notice
+      </h3>
+      <p style="font-size:12.5px;line-height:1.85;color:#94a3b8;">
+        This service is intended for temporary use only. Do not use it for banking,
+        financial services, password recovery, or confidential communication.
+        Emails may be automatically deleted without notice.
+      </p>
+    </div>
+
+    <!-- LINKS -->
+    <div style="display:flex;flex-wrap:wrap;gap:14px;font-size:12px;font-weight:800;">
+      <a href="#" style="color:#93c5fd;text-decoration:none;">Privacy Policy</a>
+      <a href="#" style="color:#93c5fd;text-decoration:none;">Terms & Conditions</a>
+      <a href="#" style="color:#93c5fd;text-decoration:none;">FAQ</a>
+      <a href="#" style="color:#93c5fd;text-decoration:none;">Articles</a>
+      <a href="#" style="color:#93c5fd;text-decoration:none;">API</a>
+      <a href="#" style="color:#93c5fd;text-decoration:none;">Contact</a>
+    </div>
+
+    <!-- DIVIDER -->
+    <div style="height:1px;background:linear-gradient(90deg,transparent,#334155,transparent);"></div>
+
+    <!-- ✅ WHATSAPP SUPPORT BUTTON -->
+    <a href="https://wa.me/8801770755916" target="_blank" style="
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:12px;
+      padding:16px 20px;
+      border-radius:999px;
+      background:linear-gradient(135deg,#22c55e,#16a34a);
+      color:#fff;
+      font-size:14px;
+      font-weight:900;
+      text-decoration:none;
+      box-shadow:0 16px 34px rgba(34,197,94,.35);
+    ">
+
+      <!-- WhatsApp Logo -->
+      <span style="
+        width:36px;
+        height:36px;
+        border-radius:999px;
+        background:#fff;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        flex:0 0 auto;
+      ">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2C6.48 2 2 6.15 2 11.26c0 1.77.54 3.48 1.56 4.93L2 22l6.02-1.48c1.34.7 2.85 1.07 4.38 1.07 5.52 0 10-4.15 10-9.26S17.52 2 12 2Z" fill="#22c55e"/>
+          <path d="M16.73 13.94c-.2.55-1.16 1.04-1.6 1.1-.4.06-.9.09-1.46-.09-.34-.11-.78-.25-1.34-.48-2.36-.98-3.9-3.28-4.02-3.43-.11-.15-.96-1.23-.96-2.35 0-1.12.63-1.67.86-1.9.23-.23.5-.29.67-.29h.48c.15 0 .36-.06.56.43.2.49.68 1.67.74 1.79.06.12.1.26.02.41-.08.15-.12.26-.24.4-.12.14-.25.31-.36.41-.12.1-.24.25-.1.48.14.23.6.97 1.28 1.57.88.79 1.62 1.04 1.86 1.16.24.12.38.1.52-.06.14-.16.6-.67.76-.9.16-.23.32-.19.53-.11.21.08 1.34.61 1.57.72.23.11.39.17.45.26.06.09.06.52-.14 1.07Z" fill="#ffffff"/>
+        </svg>
+      </span>
+
+      <span>WhatsApp Chat with Admin Tamim</span>
+    </a>
+
+    <!-- COPYRIGHT -->
+    <div style="
+      text-align:center;
+      font-size:11px;
+      font-weight:700;
+      color:#64748b;
+      margin-top:10px;
+    ">
+      © 2025 Trending Academy Limited • Secure • Privacy Friendly
+    </div>
+
+  </div>
+</footer>
+<!-- ===================== END FOOTER ===================== -->
 </body>
 </html>
